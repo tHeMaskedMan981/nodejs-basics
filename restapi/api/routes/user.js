@@ -123,9 +123,9 @@ router.get("/", (req, res, next) => {
 
 router.get("/:userId", (req, res, next) => {
   const id = req.params.userId;
-  user
+  User
     .findById(id)
-    .select("_id name price")
+    .select("_id email password")
     .exec()
     .then(doc => {
       console.log("From the database ", doc);
@@ -135,7 +135,7 @@ router.get("/:userId", (req, res, next) => {
           request: {
             type: "GET",
             description: "Get the list of all the users available",
-            url: "http://localhost:3000/users/"
+            url: "http://localhost:3000/user/"
           }
         });
       } else {
@@ -154,7 +154,7 @@ router.get("/:userId", (req, res, next) => {
 
 router.delete("/:userId", (req, res, next) => {
   const id = req.params.userId;
-  user
+  User
     .remove({ _id: id })
     .exec()
     .then(result => {
